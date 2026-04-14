@@ -65,7 +65,7 @@ class Node():
         self.value = None
     
 #building the tree
-def buildtree(X, y, depth = 0, maxdepth = 10, minsamples = 1):
+def buildtree(X, y, depth = 0, maxdepth = 4, minsamples = 2):
     n_samples = len(y)
     if(depth == maxdepth or len(np.unique(y)) == 1 or n_samples < minsamples):
         values, count = np.unique(y, return_counts=True)
