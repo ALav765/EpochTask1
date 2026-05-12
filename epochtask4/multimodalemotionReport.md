@@ -2,10 +2,10 @@
 
 ## Project Overview
 
-This project implements a **multimodal emotion recognition system** using:
+This project implements a **Multimodal Emotion Recognition System** using:
 
 1. Audio-based CNN model for speech emotion recognition
-2. Text-based BiLSTM model for transcript emotion recognition
+2. Text-based LSTM model for transcript emotion recognition
 3. Multimodal fusion model combining both modalities
 
 The dataset used is the RAVDESS speech audio dataset
@@ -125,7 +125,7 @@ Dropout was also increased to 0.3 from 0.1 in order to reduce overfitting, incre
 | Dropout | Regularization |
 | Softmax Output | Emotion classification |
 
-I kept the lstm model pretty basic since the text model wasn't doing much anyway.
+I kept the LSTM model pretty basic since the text model wasn't doing much anyway.
 
 ---
 
