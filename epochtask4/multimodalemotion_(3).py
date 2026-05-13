@@ -25,7 +25,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Conv2D, Dense, Dropout, Flatten
+from tensorflow.keras.layers import Conv2D, Dense, Dropout, Flatten, BatchNormalization
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.layers import MaxPooling2D
 from tensorflow.keras.models import Model
@@ -228,6 +228,7 @@ CNN_model.add(Conv2D(
     padding='same',
     input_shape=(128,128,1)
 ))
+CNN_model.add(BatchNormalization())
 CNN_model.add(MaxPooling2D((2,2)))
 CNN_model.add(Dropout(0.1))
 CNN_model.add(Conv2D(
@@ -236,6 +237,7 @@ CNN_model.add(Conv2D(
     activation='relu',
     padding='same'
 ))
+CNN_model.add(BatchNormalization())
 CNN_model.add(MaxPooling2D((2,2)))
 CNN_model.add(Dropout(0.3))
 CNN_model.add(Conv2D(
