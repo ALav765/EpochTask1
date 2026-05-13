@@ -34,7 +34,7 @@ flowchart TD
     A[RAVDESS Audio Dataset] --> B[Audio Preprocessing]
     A --> C[Transcript Generation]
 
-    B --> D[Feature Extraction]
+    B --> D[Spectrogram Extraction]
     D --> E[CNN Audio Model]
 
     C --> F[BERT Tokenization]
@@ -63,11 +63,12 @@ A 2D CNN-based architecture was used to learn emotional patterns from extracted 
 - ReLU activations
 - Dropout for regularization
 - Dense classification layers
+- Batch Normalization layers
 - Softmax output for 8 emotion classes
 
 ### Extracted Features
 
-The audio pipeline extracted the audio file, then padded it, normalized it and then also extracted its spectrogram for conv2d filtering.
+The audio pipeline extracted the audio file, then padded it, normalized it and then also extracted its spectrogram for Conv2d filtering.
 
 ---
 
@@ -103,7 +104,9 @@ Late fusion was selected because:
 | Layer                | Purpose                            |
 | -------------------- | ---------------------------------- |
 | Conv2D (64 filters)  | Learn low-level acoustic patterns  |
+| BatchNormalization   | Normalize the data before filter   |
 | Conv2D (128 filters) | Learn higher-level speech features |
+| BatchNormalization   | Normalize the data before filter   |
 | Conv2D (128 filters) | Deeper feature extraction          |
 | Conv2D (256 filters) | Complex emotional representation   |
 | Dropout              | Reduce overfitting                 |
@@ -114,10 +117,8 @@ Late fusion was selected because:
 | Dropout              | Reduce overfitting                 |
 | Softmax Output       | Emotion prediction                 |
 
-**Things that could be improved:**
-- BatchNormalization layers can be added in order to normalize while filtering. 
-
-A larger model using smaller progressive filters was tested earlier, but it produced significantly lower accuracy. Increasing dropout from 0.1 to 0.3 helped reduce overfitting and improved validation performance. Four Conv2D layers provided the best balance between feature extraction and model complexity.
+A larger model (32->64->128) using smaller progressive filters was tested earlier, but it produced significantly lower accuracy. Increasing dropout from 0.1 to 0.3 helped reduce overfitting and improved validation performance. Four Conv2D layers provided the best balance between feature extraction and model complexity. 
+BatchNormalization layers were added during the later layers previously, but that surprisingly caused accuracy to decrease. When they were added to earlier layers, accuracy jumped from 53% to around 60%. 
 
 ---
 
