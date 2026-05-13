@@ -114,6 +114,9 @@ Late fusion was selected because:
 | Dropout              | Reduce overfitting                 |
 | Softmax Output       | Emotion prediction                 |
 
+**Things that could be improved:**
+- BatchNormalization layers can be added in order to normalize while filtering. 
+
 A larger model using smaller progressive filters was tested earlier, but it produced significantly lower accuracy. Increasing dropout from 0.1 to 0.3 helped reduce overfitting and improved validation performance. Four Conv2D layers provided the best balance between feature extraction and model complexity.
 
 ---
