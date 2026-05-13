@@ -28,7 +28,7 @@ class knn():
         self.X_normalized = X_normalized
         self.y = y
     def predict_one(self, x):
-        dists = [euclidean_distance(x, i) for i in X_normalized]
+        dists = [euclidean_distance(x, i) for i in self.X_normalized]
         nearest= np.argsort(dists)[:self.k]
         klabels = self.y[nearest]
         values, counts = np.unique(klabels, return_counts=True)
@@ -40,7 +40,7 @@ class knn():
     def accuracy(self, X_test, y_test):
         count = 0
         for i in range(len(y_test)):
-            if np.array([self.predict_one(x) for x in Xtest_normalized])[i] == y_test[i]:
+            if predict(X_test)[i] == y_test[i]:
                 count+=1
         return count/len(y_test)*100
 
@@ -56,9 +56,9 @@ X_test = np.array([
     [185, 7.7, 2]   # Expected: Orange
 ])
 y_test= np.array([1, 0, 2])
-Xtest_normalized = (X_test - X_test.mean(axis = 0))/X_test.std(axis = 0)
+Xtest_normalized = (X_test - X.mean(axis = 0))/X.std(axis = 0)
 print(knn1.predict(Xtest_normalized))
 print(y_test)
-print(f"{knn1.accuracy(X_test, y_test)}%")
+print(f"{knn1.accuracy(Xtest_normalized, y_test)}%")
 
 
