@@ -115,9 +115,9 @@ tokenized = tokenizer(
 #HARDCODE
 def get_transcript(filepath):
     filename = os.path.basename(filepath)
-    statement = filename.split("-")[4]   # 5th field
+    sentence = filename.split("-")[4]   # 5th field
 
-    if statement == "01":
+    if sentence == "01":
         return "kids are talking by the door"
     else:
         return "dogs are sitting by the door"
@@ -160,7 +160,6 @@ for file in wav:
     fts.append(mel)
 
 X = np.array(fts)
-X = (X-X.min())/(X.max()-X.min())
 X = (X - X.mean(axis=(1,2), keepdims=True))/(X.std(axis=(1,2), keepdims=True) + 1e-8)
 X = np.expand_dims(X, axis=-1)
 
